@@ -38,6 +38,7 @@
   --team-soc-logo-color: #f4f4fd;
   --customers-icon-color: #8e8f99;
   --customers-icon-hover-color: #404bbf;
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -178,6 +179,7 @@ img {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
+  transition: color var(--transition);
 }
 .site-nav .link:is(:hover, :focus),
 .contacts-list .link:is(:hover, :focus) {
@@ -185,6 +187,24 @@ img {
 }
 .site-nav .link.current {
   color: var(--nav-active-link-color);
+}
+
+.site-item {
+  position: relative;
+  display: block;
+}
+
+.site-item .link.current::after {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  height: 4px;
+  width: 100%;
+  right: 0;
+  bottom: -100%;
+
+  background: #404bbf;
+  border-radius: 2px;
 }
 
 /* ----------------CONTACTS------------------ */
@@ -204,6 +224,7 @@ img {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--primary-contact-color);
+  transition: color var(--transition);
 }
 
 .link-contacts {
@@ -246,9 +267,11 @@ img {
   border-radius: 4px;
   min-width: 170px;
   height: 55px;
+
   color: var(--hero-text-button-color);
   background-color: var(--bcg-hero-btn-color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+
   font-family: inherit;
   font-style: normal;
   font-weight: 500;
@@ -257,6 +280,8 @@ img {
   letter-spacing: 0.04em;
   cursor: pointer;
   border: none;
+
+  transition: background-color var(--transition);
 }
 
 .hero-btn:is(:hover, :focus) {
@@ -365,7 +390,10 @@ img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+
   background-color: var(--team-soc-link-color);
+
+  transition: background-color var(--transition);
 }
 
 .team-soc-link:is(:hover, :focus) {
@@ -398,10 +426,12 @@ img {
   border: 1px solid #8e8f99;
   border-radius: 4px;
   color: var(--customers-icon-color);
+  transition: color var(--transition);
 }
 
 .customers-icon {
   fill: var(--customers-icon-color);
+  transition: fill var(--transition);
 }
 
 .customers-link:is(:hover, :focus) {
@@ -419,8 +449,13 @@ img {
   padding: 12px 24px;
   border: 1px solid var(--accent-color);
   border-radius: 4px;
+
+  transition: color var(--transition), background-color var(--transition),
+    box-shadow var(--transition);
+
   color: var(--portfolio-main-text-btn-color);
   background-color: var(--portfolio-main-bcg-btn-color);
+
   font-family: inherit;
   font-style: normal;
   font-weight: 500;
@@ -435,6 +470,7 @@ img {
   background-color: var(--portfolio-hover-bcg-btn-color);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
+  border: none;
 }
 
 .list-button {
@@ -481,6 +517,7 @@ img {
 
 .cards-link {
   display: block;
+  transition: box-shadow var(--transition);
 }
 
 .cards-link:is(:hover, :focus) {
@@ -488,9 +525,30 @@ img {
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
 }
 
-/* .cards-item.cards-subcontainer:nth-child(5) {
-  border-top: 0;
-} */
+.portfolio-cover-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-cover-text {
+  position: absolute;
+  top: 0;
+  padding: 40px 32px 164px 32px;
+  transform: translateY(100%);
+  transition: transform var(--transition);
+
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  height: 100%;
+
+  color: #f4f4fd;
+  background-color: #4d5ae5;
+}
+
+.cards-item:is(:hover, :focus) .portfolio-cover-text {
+  transform: translateY(0);
+}
 
 /* -------------FOOTER---------------- */
 .footer-text {
@@ -562,8 +620,55 @@ img {
   border-radius: 50%;
 
   background-color: var(--footer-bcg-soc-color);
+
+  transition: background-color var(--transition);
 }
 
 .footer-soc-link:is(:hover, :focus) {
   background-color: var(--footer-bcg-soc-hover-color);
+}
+
+/* --------M O D A L --- W I N D O W------- */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px;
+
+  width: 408px;
+  min-height: 576px;
+
+  background-color: #fcfcfc;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.modal-close {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+
+  background-color: var(--accent-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }

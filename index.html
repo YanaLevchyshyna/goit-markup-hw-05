@@ -31,13 +31,13 @@
           >
           <!--menu-->
           <ul class="site-nav list">
-            <li>
+            <li class="site-item">
               <a href="./index.html" class="link current">Studio</a>
             </li>
-            <li>
+            <li class="site-item">
               <a href="./portfolio.html" class="link">Portfolio</a>
             </li>
-            <li>
+            <li class="site-item">
               <a href="" class="link">Contacts</a>
             </li>
           </ul>
@@ -62,7 +62,9 @@
       <!--H E R O section-->
       <section class="hero-section">
         <h1 class="hero-title">Effective Solutions for Your Business</h1>
-        <button type="button" class="hero-btn">Order Service</button>
+        <button type="button" class="hero-btn" data-modal-open>
+          Order Service
+        </button>
       </section>
 
       <!--section1 Features-->
@@ -70,7 +72,6 @@
         <div class="container">
           <!--Зробити прихованим заголовок з class="title-secret"-->
           <h2 class="title-secret">Features</h2>
-
           <ul class="list feature-svg-list">
             <li class="feature-item">
               <svg class="feature-icon" width="64" height="64">
@@ -93,7 +94,6 @@
               </svg>
             </li>
           </ul>
-
           <ul class="list fetures-list">
             <li class="item">
               <h3 class="section-subtitle feature-title">Strategy</h3>
@@ -336,6 +336,7 @@
           </ul>
         </div>
       </section>
+      <!-- C u s t o m e r s  S e c t i o n -->
       <section class="customers-section">
         <div class="container">
           <h2 class="section-title customers-title">Customers</h2>
@@ -435,5 +436,15 @@
         </div>
       </div>
     </footer>
+    <div class="backdrop is-hidden" data-modal>
+      <div class="modal">
+        <button type="button" class="modal-close" data-modal-close>
+          <svg class="modal-icon" width="8" height="8">
+            <use href="./images/symbol-defs.svg#icon-close-modal-btn"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script src="./js/modal.js"></script>
   </body>
 </html>
